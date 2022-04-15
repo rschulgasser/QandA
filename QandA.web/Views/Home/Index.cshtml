@@ -1,0 +1,29 @@
+﻿@model HomeVeiwModel
+@foreach (var questoin in Model.Questions)
+{
+<div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card card-body bg-light">
+                <h4>
+                    <a href="/home/viewquestion?id=@questoin.Id">
+                        @questoin.Title
+                    </a>
+                </h4>
+                <div>
+                    @foreach (var tag in questoin.QuestionsTags)
+                    {
+                    <span>Tags:</span>
+                   <a href= "/home/GetQuestionsForTag?tagname=@tag.Tag.Name"> <span class="badge badge-primary">@tag.Tag.Name</span></a>
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                    @questoin.Text
+                </div>
+                <span>Likes: @questoin.Likes.Count </span>
+                <br />
+                <span>@questoin.Answers.Count answer(s)</span>
+            </div>
+        </div>
+           
+    </div>
+}
