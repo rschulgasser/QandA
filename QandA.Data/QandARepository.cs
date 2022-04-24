@@ -61,7 +61,7 @@ namespace QandA.Data
         public Question GetQuestionById(int id)
         {
             using var context = new QandAContext(_connectionString);
-            return context.Questions.Include(i => i.Likes).Include(i=>i.Answers).ThenInclude(i=>i.User).Include(i=>i.User).Include(i=>i.QuestionsTags).ThenInclude(i=>i.Tag).FirstOrDefault(f => f.Id == id);
+            return context.Questions.Include(i => i.Likes).Include(i=>i.Answers).ThenInclude(i=>i.User).Include(i=>i.User).Include(i=>i.QuestionsTags).ThenInclude(i=>i.Tag).Include(i => i.QuestionsTags).ThenInclude(j=>j.Question).FirstOrDefault(f => f.Id == id);
         }
         public User GetUserByEmail(string email)
         {

@@ -1,23 +1,32 @@
 ﻿$(() => {
 
-    console.log("dfdf");
+    const questionId =  $("#question-id").val();
+    setInterval(UpdateLikes(questionId), 1000);
+
+
+    console.log(questionId);
     $("#add-like").on('click', function () {
 
-        $("#likes").append(` <br /> <br /> <span style="font-size: 40px; cursor: pointer;" class="oi oi-heart text-danger">heart</span>`);
+    //  $("#add-like").remove();
+      
         console.log("in");
-        const QuestionId = $(this).data('question-id');
+        $('#add-like').addClass('text-danger');
+        $('#add-like').prop('disabled', true);
+
+        $("#add-like").attr('class', "oi oi-heart text-danger");
+
+        const questionId = $("#question-id").val();
+     
         const liked = true;
 
+        $.post('/home/addlike', { questionId, liked }, function () {
 
-        $.post('/home/addlike', { QuestionId, liked }, function () {
-           
-
-            $("#add-like").remove();
-
-            UpdateLikes(QuestionId);
-
+            //$("#add-like").addClass('text-danger');
+            //$("#add-like").prop('disabled', true);
+          UpdateLikes(questionId);
+         //   $("#add-like").attr('class', "oi oi-heart text-danger");
          
-            
+       //  $("#question-id").append(` <br /> <br /> <h1> <span style="font-size: 40px; cursor: pointer;" class="oi oi-heart text-danger">heart</span> </h1>`);
           
        
 

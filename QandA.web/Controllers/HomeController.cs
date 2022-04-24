@@ -99,11 +99,11 @@ namespace QandA.web.Controllers
         }
         [Authorize]
         [HttpPost]
-        public IActionResult AddAnswer(Answer answer)
+        public IActionResult AddAnswer(Answer answer,int questionId)
         {
             var connectionString = _configuration.GetConnectionString("ConStr");
             QandARepository repo = new(connectionString);
-
+            answer.QuestionId = questionId;
             answer.DatePosted = DateTime.Now;
             answer.UserId = repo.GetByEmail(User.Identity.Name).Id;
             repo.AddAnswer(answer);
